@@ -13,6 +13,7 @@
         >
     </button>
     <div class="duration">
+        <!-- @ts-ignore -->
         <div class="remaining" style="--p: {remaining / duration}" />
     </div>
 </div>

@@ -39,7 +39,7 @@
             if (remaining <= 0) {
                 //TODO: game lost
                 playing = false;
-                alert("Game over");
+                return;
             }
             // console.log(remaining);
         }
