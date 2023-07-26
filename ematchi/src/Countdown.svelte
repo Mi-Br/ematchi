@@ -41,6 +41,8 @@
         width: 1em;
         height: 1em;
         position: relative;
+        background: transparent;
+        border: none;
     }
     svg {
         position: absolute;

@@ -1,9 +1,11 @@
 <script lang="ts">
     import { get_tweemoji_url } from "./utils";
+    import { send } from "./transition";
 
     export let emoji: string;
     export let selected: boolean;
     export let found: boolean;
+    export let group: "a" | "b";
 </script>
 
 <div class="square" class:flipped={selected || found}>
@@ -12,7 +14,11 @@
     {/if} -->
     <button on:click disabled={selected || found} />
     {#if !found}
-        <img alt={emoji} src={get_tweemoji_url(emoji)} />
+        <img
+            out:send={{ key: `${emoji}:${group}` }}
+            alt={emoji}
+            src={get_tweemoji_url(emoji)}
+        />
     {/if}
 </div>
 
@@ -44,6 +50,8 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background: none;
+        /* background: #eee; */
+        border: 0;
+        border-radius: 1em;
     }
 </style>

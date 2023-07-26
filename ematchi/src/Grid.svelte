@@ -38,6 +38,7 @@
                     a = i;
                 }
             }}
+            group={grid.indexOf(emoji) == i ? "a" : "b"}
         />
     {/each}
 </div>
