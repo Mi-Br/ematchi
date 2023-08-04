@@ -14,6 +14,7 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "@fontsource/grandstander": "^5.0.5"
+    "@fontsource/grandstander": "^5.0.5",
+    "@neoconfetti/svelte": "^1.0.0"
   }
 }

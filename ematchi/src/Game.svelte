@@ -4,7 +4,6 @@
     import Found from "./Found.svelte";
     import Grid from "./Grid.svelte";
     import type { Level } from "./levels";
-    import { levels } from "./levels";
     import { shuffle } from "./utils";
 
     const dispatch = createEventDispatcher();
@@ -24,9 +23,8 @@
         resume();
     }
 
-    function resume() {
+    export function resume() {
         playing = true;
-        console.log(playing);
         countdown();
         // communicate event to APP component
         dispatch("play");
@@ -48,31 +46,28 @@
     function countdown() {
         const start = Date.now();
         let remaining_at_start = remaining;
-        if (playing) return;
+        // if (playing) return;
         function loop() {
             requestAnimationFrame(loop);
             remaining = remaining_at_start - (Date.now() - start);
             if (remaining <= 0) {
-                //TODO: loose the game
-                // playing = false;
-                // return;
+              dispatch('lost');
             }
             // console.log(remaining);
         }
         loop();
     }
-    onMount(countdown);
 </script>
 
-<div class="game">
+<div class="game" style="--size: {size}">
     <div class="info">
         {#if playing}
             <Countdown
                 {remaining}
                 {duration}
                 on:click={() => {
-                    countdown();
-                    console.log("should play");
+                   playing = false;
+                   dispatch('paused'); 
                 }}
             />
         {/if}
@@ -85,7 +80,7 @@
                 found = [...found, e.detail.emoji];
                 // check if we found all emojis
                 if (found.length == (size * size) / 2) {
-                    // TODO - win the game
+                    dispatch('won');
                     playing = false;
                 }
             }}
